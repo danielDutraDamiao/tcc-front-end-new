@@ -13,6 +13,12 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { VendaRoutingModule } from './venda-routing.module';
 import { VendaComponent } from './venda.component';
+import { TableModule } from 'primeng/table';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { DataViewModule } from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
 	imports: [
@@ -28,7 +34,15 @@ import { VendaComponent } from './venda.component';
 		CascadeSelectModule,
 		MultiSelectModule,
 		InputTextareaModule,
-		InputTextModule
+		InputTextModule,
+		TableModule,
+		MegaMenuModule,
+		DataViewModule,
+		TagModule,
+		RatingModule,
+		ButtonModule,
+		
+
 	],
 	declarations: [VendaComponent]
 })

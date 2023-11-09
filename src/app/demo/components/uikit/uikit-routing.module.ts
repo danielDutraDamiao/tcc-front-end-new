@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
         { path: 'floatlabel', data: { breadcrumb: 'Float Label' }, loadChildren: () => import('./floatlabel/floatlabeldemo.module').then(m => m.FloatlabelDemoModule) },
         { path: 'formlayout', data: { breadcrumb: 'Form Layout' }, loadChildren: () => import('./formlayout/formlayoutdemo.module').then(m => m.FormLayoutDemoModule) },
         { path: 'venda', data: { breadcrumb: 'Venda' }, loadChildren: () => import('./venda/venda.module').then(m => m.VendaModule) },
+        { path: 'doacao', data: { breadcrumb: 'Doacao' }, loadChildren: () => import('./doacao/doacao.module').then(m => m.DoacaoModule) },
         { path: 'input', data: { breadcrumb: 'Input' }, loadChildren: () => import('./input/inputdemo.module').then(m => m.InputDemoModule) },
         { path: 'invalidstate', data: { breadcrumb: 'Invalid State' }, loadChildren: () => import('./invalid/invalidstatedemo.module').then(m => m.InvalidStateDemoModule) },
         { path: 'list', data: { breadcrumb: 'List' }, loadChildren: () => import('./list/listdemo.module').then(m => m.ListDemoModule) },

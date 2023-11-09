@@ -1,1 +1,38 @@
-teste
+<div class="card">
+    <p-table [value]="produtos" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                Produtos
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Imagem</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th>Avaialiações</th>
+                <th>Status</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-produto>
+            <tr>
+                <td>{{produto.nomeProduto}}</td>
+                <td><img [src]="produto.imagemProduto || 'assets/images/Earth.jpg'" 
+                         [alt]="produto.nomeProduto" 
+                         width="100" 
+                         class="shadow-4"
+                         onerror="this.src='assets/default-image.png';" /></td>
+                <td>{{'$' + produto.precoProduto}}</td>
+                <td>{{produto.subcategoria?.categoria?.nomeCategoria}}</td>
+                <td><p-rating [(ngModel)]="produto.avaliacao" [readonly]="true" [cancel]="false"></p-rating></td>
+                <td><p-tag [value]="produto.statusInventario" [severity]="getSeverity(produto.statusInventario)"></p-tag></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                Há um total de: {{produtos ? produtos.length : 0 }} produtos.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
