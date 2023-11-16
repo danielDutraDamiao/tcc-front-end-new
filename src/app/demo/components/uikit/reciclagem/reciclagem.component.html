@@ -1,0 +1,50 @@
+<!-- Start Overview -->
+
+<div class="overview text-center">
+    <div class="container">
+      <h2 class="h1">Recicle já!</h2>
+      <p>Selecione a empresa de reciclagem mais próxima de você e faça a diferença!</p>
+      <h4>Vamos contribuir hoje?</h4>
+      <button style="display: inline-block; margin-right: 10px;">Quero Reciclar!</button>
+      <p-cascadeSelect [(ngModel)]="cidadeSelecionada" 
+                   [options]="options" 
+                   optionLabel="label" 
+                   optionValue="value" 
+                   optionGroupLabel="name" 
+                   [optionGroupChildren]="['items']" 
+                   placeholder="Selecione um Estado" 
+                   (onChange)="filtrarEmpresas()">
+  </p-cascadeSelect>
+    </div>
+  </div>
+  <!-- End Overview -->
+
+  <!-- Table of ONGs -->
+  <div class="card">
+    <p-table [value]="empresasWithFilter" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>CNPJ</th>
+          <th>Endereço</th>
+          <th>Cidade</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-empresa>
+        <tr>
+          <td>{{ empresa.idEmpresa }}</td>
+          <td>{{ empresa.nome }}</td>
+          <td>{{ empresa.cnpj }}</td>
+          <td>{{ empresa.endereco }}</td>
+          <td>{{ empresa.cidade.nomeCidade }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+  
+
+  
