@@ -222,7 +222,10 @@
 /* Start Choose Us */
 
 .choose-us img {
-  max-width: 100%
+  max-width: 100%;
+  height: 100%;
+
+
 }
 
 .choose-us .info {
