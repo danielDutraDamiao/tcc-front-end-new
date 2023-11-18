@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
         { path: 'login', data: { breadcrumb: 'Login' }, loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
         { path: 'doacao', data: { breadcrumb: 'Doacao' }, loadChildren: () => import('./doacao/doacao.module').then(m => m.DoacaoModule) },
         { path: 'produtos', data: { breadcrumb: 'Produtos' }, loadChildren: () => import('./cadastro-produtos/produtos.module').then(m => m.ProdutosModule) },
+        { path: 'ecocoins', loadChildren: () => import('./ecocoins/ecocoins.module').then(m => m.EcocoinsModule) },
         { path: 'input', data: { breadcrumb: 'Input' }, loadChildren: () => import('./input/inputdemo.module').then(m => m.InputDemoModule) },
         { path: 'invalidstate', data: { breadcrumb: 'Invalid State' }, loadChildren: () => import('./invalid/invalidstatedemo.module').then(m => m.InvalidStateDemoModule) },
         { path: 'list', data: { breadcrumb: 'List' }, loadChildren: () => import('./list/listdemo.module').then(m => m.ListDemoModule) },
