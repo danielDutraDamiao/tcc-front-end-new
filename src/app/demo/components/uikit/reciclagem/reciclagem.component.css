@@ -1,3 +1,7 @@
+/*** Header ***/
+.hero-header .breadcrumb-item+.breadcrumb-item::before {
+  color: var(--secondary);
+}
 
 
 
