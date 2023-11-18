@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -57,6 +58,10 @@ export class LoginComponent implements OnInit {
         this.toast.error(err);
       }
     )
+  }
+
+  navegarParaCriarConta() {
+    this.route.navigate(['/uikit/usuarios']); // Substitua '/caminho-para-criar-conta' pela rota desejada
   }
   
 

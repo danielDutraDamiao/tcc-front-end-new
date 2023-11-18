@@ -7,7 +7,7 @@ import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect'; // Verifique o caminho correto
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { TableModule } from 'primeng/table';
-import { LoginComponent } from './logincomponent';
+import { LoginComponent } from './login.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';

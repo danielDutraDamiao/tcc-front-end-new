@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { LoginService } from '../demo/components/auth/login/login.service';
 
 @Component({
     selector: 'app-menu',
@@ -10,9 +11,12 @@ export class AppMenuComponent implements OnInit {
 
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private loginService: LoginService) { }
 
     ngOnInit() {
+        const userProfile = this.loginService.getUserProfile();
+        console.log('userProfile', userProfile);
+    
         this.model = [
             {
                 label: 'Home',
@@ -23,13 +27,21 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Menus',
                 items: [
-                    { label: 'Venda', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/venda'] },
                     { label: 'Doacao', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/doacao'] },
                     { label: 'Reciclagem', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/reciclagem'] },
-                    { label: 'Cadastro de Produtos', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/produtos'] },
                     { label: 'Ecocoins', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/ecocoins'] },
+                    // Adicione os itens condicionais aqui
                 ]
             }
         ];
+    
+        if (userProfile === 'Vendedor') {
+            this.model[1].items.push({ label: 'Cadastro de Produtos', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/produtos'] });
+        } else if (userProfile === 'Comprador') {
+            // Adicionar itens específicos para comprador
+            // Exemplo: this.model[1].items.push({ label: 'Item Comprador', icon: 'pi pi-fw pi-user', routerLink: ['/uikit/comprador'] });
+        }
     }
+
+    
 }

@@ -31,7 +31,11 @@
                         <label for="subcategoria">Subcategoria</label>
                         <p-dropdown [options]="subCategoriasFiltradas" optionLabel="nomeSubCategoria" formControlName="subcategoria"></p-dropdown>
                       </div>
-                      
+
+                    <div class="field col">
+                        <label>Enviar Imagem</label>
+                        <button pButton type="button" label="Open" icon="pi pi-folder-open" class="p-button-secondary mr-2"></button>
+                    </div>
                 </div>
 
                 <div class="p-formgrid grid">
@@ -40,6 +44,8 @@
                         <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
                     </div>
                 </div>
+            
+
             </div>
         </div>
     </div>

@@ -1,10 +1,10 @@
-<div class="surface-card p-10 shadow-2 border-round w-full lg:w-6">
+<div class="surface-card p-1 shadow-2 border-round w-full lg:w-15">
   <div class="text-center mb-10">
-    <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+    <img src="assets/{{layoutService.config.colorScheme === 'light' ? 'ecomarket' : 'ecomarket'}}.png"
       alt="Sakai logo" class="mb-5 w-6rem flex-shrink-0">
     <div class="text-900 text-3xl font-medium mb-3">Bem vindo de Volta</div>
     <span class="text-600 font-medium line-height-3">Não tenho uma conta</span>
-    <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+    <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" (click)="navegarParaCriarConta()">Criar agora</a>
   </div>
 
   <div>
@@ -12,14 +12,14 @@
       <div>
         
       </div>
-      <label class="block text-900 font-medium mb-2">Nome de Usuário</label>
-      <input type="text" class="form-control" formControlName="username" placeholder="Username" pInputText class="w-full mb-3">
+      <label class="block text-900 font-medium mb-10">Nome de Usuário</label>
+      <input type="text" class="form-control" formControlName="username" placeholder="Usuário" pInputText class="w-full mb-3">
       <div class="form-text text-danger" *ngIf="isFormControlInvalid('username')">
         O username deve conter pelo menos 6 caracteres
       </div>
 
       <label class="block text-900 font-medium mb-2">Senha</label>
-      <input type="password" class="form-control" formControlName="password" placeholder="Password" pInputText
+      <input type="password" class="form-control" formControlName="password" placeholder="Senha" pInputText
         class="w-full mb-3">
       <div class="form-text text-danger" *ngIf="isFormControlInvalid('password')">
         O password deve conter pelo menos 6 caracteres
@@ -30,7 +30,7 @@
           <p-checkbox id="rememberme" [binary]="true" styleClass="mr-2"></p-checkbox>
           <label for="rememberme1">Lembre de mim</label>
         </div>
-        <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
+        <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Esqueci minha senha</a>
       </div>
 
       <button type="button" pButton pRipple label="Entrar" icon="pi pi-user" class="w-full"
