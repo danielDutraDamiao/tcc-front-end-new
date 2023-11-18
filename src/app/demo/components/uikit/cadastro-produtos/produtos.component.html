@@ -1,0 +1,46 @@
+<form [formGroup]="produtoForm" (ngSubmit)="enviarFormulario()">
+    <div class="grid">
+        <div class="col-12 md:col-6">
+            <div class="card p-fluid">
+                <h5>Cadastrar Produtos</h5>
+                <div class="p-formgrid grid">
+                    <div class="field col">
+                        <label for="nomeProduto">Nome Produto</label>
+                        <input pInputText id="nomeProduto" formControlName="nomeProduto" type="text" />
+                    </div>
+                    <div class="field col">
+                        <label for="precoProduto">Preço Produto</label>
+                        <input pInputText id="precoProduto" formControlName="precoProduto" type="text" />
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col">
+                        <label for="quantidade">Quantidade</label>
+                        <input pInputText id="quantidade" formControlName="quantidade" type="text" />
+                    </div>
+                    <div class="field col">
+                        <label for="categoria">Categoria</label>
+                        <p-dropdown [options]="categorias" optionLabel="nomeCategoria" formControlName="categoria"
+                            (onChange)="onCategoriaChange($event.value)"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col">
+                        <label for="subcategoria">Subcategoria</label>
+                        <p-dropdown [options]="subCategoriasFiltradas" optionLabel="nomeSubCategoria" formControlName="subcategoria"></p-dropdown>
+                      </div>
+                      
+                </div>
+
+                <div class="p-formgrid grid">
+                    <div class="field col">
+                        <button pButton label="Cadastrar" type="submit"></button>
+                        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

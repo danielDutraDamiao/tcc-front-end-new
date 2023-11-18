@@ -21,12 +21,12 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'UI Components',
+                label: 'Menus',
                 items: [
                     { label: 'Venda', icon: 'pi pi-fw pi-bookmark', routerLink: ['/uikit/venda'] },
                     { label: 'Doacao', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/doacao'] },
                     { label: 'Reciclagem', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/reciclagem'] },
-                    
+                    { label: 'Cadastro de Produtos', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/produtos'] },
                 ]
             }
         ];
