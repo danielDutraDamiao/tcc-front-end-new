@@ -105,6 +105,15 @@
 
 /* Start Latest Posts */
 
+
+
+
+.custom-align {
+  text-align: left; /* Alinhamento justificado */
+  margin-bottom: 5px; /* Espaçamento na parte inferior */
+  letter-spacing: 0.1px; /* Ajuste o valor conforme necessário */
+
+}
 .latest-posts {
   padding: 0 0 100px;
 
@@ -125,7 +134,9 @@
 }
 
 .latest-posts .card {
-  margin-bottom: 30px
+  margin-bottom: 30px;
+  height: 600px; /* Ajuste a altura conforme necessário */
+
 }
 
 .latest-posts .card .card-title {
