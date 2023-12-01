@@ -1,3 +1,4 @@
+<p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
 <div class="card">
     <p-table [value]="produtos" [tableStyle]="{'min-width': '60rem'}">
         <ng-template pTemplate="caption">
@@ -13,6 +14,7 @@
                 <th>Categoria</th>
                 <th>Avaialiações</th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-produto>
@@ -27,6 +29,11 @@
                 <td>{{produto.subcategoria?.categoria?.nomeCategoria}}</td>
                 <td><p-rating [(ngModel)]="produto.avaliacao" [readonly]="true" [cancel]="false"></p-rating></td>
                 <td><p-tag [value]="produto.statusInventario" [severity]="getSeverity(produto.statusInventario)"></p-tag></td>
+                <td>
+                    <!-- Botão de carrinho de compras -->
+                    <button pButton type="button" icon="pi pi-shopping-cart" class="p-button-rounded p-button-success p-button-outlined"
+                            (click)="comprarProduto(produto)"></button>
+                </td>    
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
@@ -36,3 +43,22 @@
         </ng-template>
     </p-table>
 </div>
+
+<p-dialog header="Detalhes do Produto" [(visible)]="exibirDialogo" [modal]="true" [style]="{width: '50vw'}">
+    <div *ngIf="produtoSelecionado">
+        <h3>{{ produtoSelecionado.nomeProduto }}</h3>
+        <p>Preço: {{ produtoSelecionado.precoProduto }}</p>
+        <!-- Campo para escolher a quantidade -->
+        <p-inputNumber [(ngModel)]="quantidadeCompra" size="1" [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical" inputId="vertical" decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"></p-inputNumber>
+        <!-- Adicione mais detalhes conforme necessário -->
+    </div>
+    <p-footer>
+        <button pButton type="button" label="Cancelar" icon="pi pi-times" (click)="fecharDialogo()" class="p-button-text"></button>
+        <button pButton type="button" label="Confirmar" icon="pi pi-check" (click)="confirmarCompra()" class="p-button-success"></button>
+    </p-footer>
+</p-dialog>
+
+
+
+
+

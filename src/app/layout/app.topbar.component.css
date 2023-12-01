@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'money';
+    src: url('/assets/Money Money.ttf') format('truetype');
+}
+
+
+.ecocoins-symbol {
+    background-color: #28a745; /* Cor verde */
+    border-radius: 50%; /* Torna o fundo redondo */
+    padding: 10px; /* Espaçamento interno */
+    display: inline-flex; /* Para centralizar o ícone verticalmente */
+    align-items: center;
+    justify-content: center;
+    color: white; /* Cor do ícone */
+    font-family: 'money', sans-serif; /* Sua fonte pixelizada */
+    font-size: 20px; /* Tamanho do ícone */
+}
+
+.ecocoins-value {
+    font-family: 'money', sans-serif; /* Sua fonte pixelizada */
+    color: #28a745; /* Cor verde */
+    margin-left: 5px; /* Espaçamento à esquerda */
+}
+

@@ -12,6 +12,7 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ToastrModule } from 'ngx-toastr';
+import { MessageModule } from 'primeng/message';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
     imports: [
         AppRoutingModule,
         AppLayoutModule,
+        MessageModule,
         ToastrModule.forRoot(),
         
     ],

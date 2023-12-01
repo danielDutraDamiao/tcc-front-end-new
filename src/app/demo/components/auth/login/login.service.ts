@@ -7,6 +7,7 @@ import { EstadoDTO } from 'src/app/demo/models/estado.dto';
 import { OngDTO } from 'src/app/demo/models/ong.dto';
 import { environment } from 'src/app/demo/environments/environment';
 import { jwtDecode } from "jwt-decode";
+import { UsersDTO } from 'src/app/demo/models/users.dto';
 
 
 
@@ -34,24 +35,44 @@ export class LoginService {
     public getToken(): string | null {
         return localStorage.getItem(environment.token);
     }
+    
+
+    public isLoggedIn(): boolean {
+        const token = this.getToken();
+        if (!token) {
+            return false;
+        }
+        // Aqui você pode adicionar lógica adicional para verificar se o token ainda é válido
+        return true;
+    }
 
     private setTokenLocalStorage(response: any) {
-        const {type, token} = response;
+        const { type, token } = response;
         localStorage.setItem(environment.token, token);
-    
-        // Decodificar o token e extrair informações do perfil
+      
+        // Decodificar o token e extrair informações
         const decodedToken = jwtDecode(token) as any;
-        // Salvar informações do perfil no local storage ou em um serviço
         localStorage.setItem('userProfile', decodedToken.perfil);
+        localStorage.setItem('userId', decodedToken.userId);
+    
+        console.log("Perfil do usuário: " + decodedToken.perfil);
+        console.log("ID do usuário: " + decodedToken.userId);
     }
+    
 
     public getUserProfile(): string | null {
         return localStorage.getItem('userProfile');
     }
 
-    private removerTokenLocalStorage(): void {
+    public removerTokenLocalStorage(): void {
         localStorage.removeItem(environment.token);
     }
+
+    public getUserId(): number | null {
+        const userId = localStorage.getItem('userId');
+        return userId ? parseInt(userId) : null;
+    }
+    
 
 
 }

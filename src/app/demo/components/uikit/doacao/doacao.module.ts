@@ -8,6 +8,7 @@ import { MultiSelectModule } from 'primeng/multiselect'; // Verifique o caminho 
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { TableModule } from 'primeng/table';
 import { DoacaoComponent } from './doacao.component';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -22,7 +23,8 @@ import { DoacaoComponent } from './doacao.component';
     CardModule,
     MultiSelectModule, 
     CascadeSelectModule,
-    TableModule
+    TableModule,
+    ButtonModule
   ]
 })
 export class DoacaoModule { }

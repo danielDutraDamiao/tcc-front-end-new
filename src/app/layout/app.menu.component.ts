@@ -16,32 +16,40 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         const userProfile = this.loginService.getUserProfile();
         console.log('userProfile', userProfile);
+        console.log()
+        const userSession = this.loginService.getToken();
+        console.log('userSession', userSession);
     
-        this.model = [
-            {
-                label: 'Home',
-                items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
-                ]
-            },
-            {
-                label: 'Menus',
-                items: [
-                    { label: 'Doacao', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/doacao'] },
-                    { label: 'Reciclagem', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/reciclagem'] },
-                    { label: 'Ecocoins', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/ecocoins'] },
-                    // Adicione os itens condicionais aqui
-                ]
+        if(userSession){
+
+            this.model = [
+                {
+                    label: 'Home',
+                    items: [
+                        { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    ]
+                },
+                {
+                    label: 'Menus',
+                    items: [
+                        { label: 'Doacao', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/doacao'] },
+                        { label: 'Reciclagem', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/reciclagem'] },
+                        { label: 'Ecocoins', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/ecocoins'] },
+                        { label: 'Vendas', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/venda'] },
+                    ]
+                }
+            ];
+        
+            if (userProfile === 'Vendedor') {
+                this.model[1].items.push({ label: 'Cadastro de Produtos', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/produtos'] });
+            } else if (userProfile === 'Comprador') {
+                // Adicionar itens específicos para comprador
+                // Exemplo: this.model[1].items.push({ label: 'Item Comprador', icon: 'pi pi-fw pi-user', routerLink: ['/uikit/comprador'] });
             }
-        ];
-    
-        if (userProfile === 'Vendedor') {
-            this.model[1].items.push({ label: 'Cadastro de Produtos', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/produtos'] });
-        } else if (userProfile === 'Comprador') {
-            // Adicionar itens específicos para comprador
-            // Exemplo: this.model[1].items.push({ label: 'Item Comprador', icon: 'pi pi-fw pi-user', routerLink: ['/uikit/comprador'] });
         }
-    }
+
+        }
+      
 
     
 }

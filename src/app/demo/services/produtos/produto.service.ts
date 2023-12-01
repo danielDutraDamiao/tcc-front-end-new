@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { environment } from '../../environments/environment';
@@ -31,5 +31,10 @@ export class ProdutoService {
 
   deletarProduto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseURL}/${id}`);
+  }
+
+  processarCompra(idProduto: number, idUsuario: number, quantidade: number): Observable<any> {
+    const params = new HttpParams().set('quantidade', quantidade.toString());
+    return this.http.post(`${this.baseURL}/comprar/${idProduto}/${idUsuario}`, null, { params });
   }
 }

@@ -9,21 +9,29 @@ import { ProductService } from 'src/app/demo/service/product.service';
 import { SubCategoriaService } from 'src/app/demo/services/subcategorias/subcategorias.service';
 import { CategoriaService } from 'src/app/demo/services/categorias/categoria.service';
 import { ProdutoService } from 'src/app/demo/services/produtos/produto.service';
+import { LoginService } from '../../auth/login/login.service';
+import { Message } from 'primeng/api';
 
 @Component({
-    templateUrl: './venda.component.html',
+  templateUrl: './venda.component.html',
+  styleUrls: ['./venda.component.css']
 })
 export class VendaComponent implements OnInit {
-categorias: CategoriaDTO[] = [];
+  categorias: CategoriaDTO[] = [];
   produtos: ProdutoDTO[] = [];
   items!: MegaMenuItem[];
   subCategorias: SubCategoriaDTO[] = [];
   defaultImageUrl: string = 'src\assets\images\Earth.png';
-  
+  exibirDialogo: boolean = false;
+  produtoSelecionado: ProdutoDTO | null = null;
+  quantidadeCompra: number = 1; // Quantidade inicial
+  messages: Message[] = [];
+
 
   constructor(
     private categoriaService: CategoriaService,
     private produtoService: ProdutoService,
+    private loginService: LoginService,
     private subCategoriaService: SubCategoriaService,
     private productService: ProductService,
   ) { this.items = []; }
@@ -38,10 +46,10 @@ categorias: CategoriaDTO[] = [];
       this.subCategorias = result.subCategorias;
       this.produtos = result.produtos;
       this.items = this.buildMenu(this.produtos);
-  
+
     });
   }
-  
+
 
 
   buildMenu(produtos: ProdutoDTO[]): MegaMenuItem[] {
@@ -99,16 +107,50 @@ categorias: CategoriaDTO[] = [];
     return menuItems;
   }
 
+  comprarProduto(produto: ProdutoDTO) {
+    this.produtoSelecionado = produto;
+    this.exibirDialogo = true;
+  }
+
+  fecharDialogo() {
+    this.exibirDialogo = false;
+    this.produtoSelecionado = null;
+  }
+
+  confirmarCompra() {
+    const userId = this.loginService.getUserId();
+    if (this.produtoSelecionado) {
+      this.produtoService.processarCompra(this.produtoSelecionado.idProduto, userId, this.quantidadeCompra)
+        .subscribe({
+          next: (resposta) => {
+            this.messages = [{ severity: 'success', summary: 'Compra Confirmada', detail: 'Sua compra foi realizada com sucesso!' }];
+          },
+          error: (erro) => {
+            // Verificar se o erro é específico de ecoCoins insuficientes
+            if (erro.error === 'EcoCoins insuficientes para realizar a compra.') {
+              this.messages = [{ severity: 'warn', summary: 'EcoCoins Insuficientes', detail: 'Você não possui EcoCoins suficientes para esta compra.' }];
+            } else {
+              this.messages = [{ severity: 'error', summary: 'Erro no Processamento', detail: 'Erro ao processar a compra!' }];
+            }
+          }
+        });
+  
+      this.fecharDialogo();
+    }
+  }
+  
+
+
   getSeverity(status: string): string {
     switch (status) {
-        case 'Em Estoque':
-            return 'success';
-        case 'Baixo Estoque':
-            return 'warning';
-        case 'Sem Estoque':
-            return 'danger';
-        default:
-            return 'secondary'; // ou outro valor padrão
+      case 'Em Estoque':
+        return 'success';
+      case 'Baixo Estoque':
+        return 'warning';
+      case 'Sem Estoque':
+        return 'danger';
+      default:
+        return 'secondary'; // ou outro valor padrão
     }
   }
 }

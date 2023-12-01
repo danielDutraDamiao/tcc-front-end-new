@@ -6,6 +6,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Message } from 'primeng/api';
 
 
 
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   public formLogin: FormGroup;
   rememberMe: [false] // ou [valorInicial, validadores] se necessário
+  messages: Message[] = []; // Inicializado como um array vazio
 
 
   constructor(private fb: FormBuilder, private route: Router, private toast: ToastrService, private loginService: LoginService, public layoutService: LayoutService){
@@ -39,30 +41,24 @@ export class LoginComponent implements OnInit {
     return !!(this.formLogin.get(controlName)?.invalid && this.formLogin.get(controlName)?.touched)
   }
 
-  public submitForm(){
-    console.log("submit form")
-    const {username, password} = this.formLogin.value;
-    console.log("username: ", username)
-    console.log("password: ", password)
-    this.formLogin.reset();
+  public submitForm() {
+    const { username, password } = this.formLogin.value;
     
-
-    this.loginService.login(username, password).subscribe(  
-      res =>{
+    this.loginService.login(username, password).subscribe(
+      res => {
         this.toast.success("Login efetuado com sucesso");
         this.route.navigate(['dashboard']);
-
+        this.messages = []; // Limpar mensagens anteriores
       },
       err => {
-        this.toast.error(err);
+        this.toast.error("Erro no login");
+        this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Usuário ou Senha incorretos.' }];
       }
-    )
+    );
   }
 
   navegarParaCriarConta() {
     this.route.navigate(['/uikit/usuarios']); // Substitua '/caminho-para-criar-conta' pela rota desejada
   }
-  
-
 }
 
