@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReciclagemService } from './reciclagem.service';
 import { EstadoDTO } from 'src/app/demo/models/estado.dto';
 import { EmpresaDTO } from 'src/app/demo/models/empresa.dto';
+import { OngDTO } from 'src/app/demo/models/ong.dto';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class ReciclagemComponent implements OnInit {
   empresas: EmpresaDTO[] = []; // Lista original de ONGs
   empresasWithFilter: EmpresaDTO[] = []; // Lista filtrada de ONGs para exibição na tabela  
 
-  constructor(private reciclagemService: ReciclagemService) {
+  constructor(private reciclagemService: ReciclagemService, private route: Router) {
     this.options = [];
   }
 
@@ -39,6 +41,10 @@ export class ReciclagemComponent implements OnInit {
     );
   }
   
+  navegarParaDoacao(ong: OngDTO) {
+    // Aqui você pode usar a informação da ONG para passar como parâmetro, se necessário
+    this.route.navigate(['/uikit/doacao-produtos']);
+  }
 
   public buscarEstados() {
     this.reciclagemService.listarEstados().subscribe(estados => {

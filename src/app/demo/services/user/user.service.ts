@@ -58,4 +58,10 @@ obterInformacoesUsuarioLogado(): Observable<UsersDTO> {
   return this.http.get<UsersDTO>(`${this.baseURL}/${userId}`);
 }
 
+//request body
+recuperarSenha(username: string, newPassword: string, confirmPassword: string): Observable<any> {
+  const body = { username, novaSenha: newPassword, confirmarNovaSenha: confirmPassword };
+  return this.http.put(`${this.baseURL}/recuperarSenha`, body);
+}
+
 }
