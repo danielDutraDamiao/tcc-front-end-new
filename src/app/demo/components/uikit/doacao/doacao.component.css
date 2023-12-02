@@ -163,3 +163,23 @@
 }
 
 /* End Choose Us */
+
+
+
+.moeda-icon {
+  font-family: 'Font Awesome 5 Free'; /* Substitua pelo nome da sua fonte de ícones */
+  font-size: 24px; /* Ajuste conforme necessário */
+  color: #ffd700; /* Cor da moeda, ajuste conforme necessário */
+  cursor: pointer;
+}
+
+.custom-button {
+  background-color: #198754; /* Cor verde para o fundo do botão */
+  color: #fff; /* Cor branca para o texto do botão */
+  font-weight: bold; /* Deixa o texto em negrito */
+}
+
+.custom-button:hover {
+  background-color: #146c43; /* Cor verde mais escura ao passar o mouse */
+}
+
