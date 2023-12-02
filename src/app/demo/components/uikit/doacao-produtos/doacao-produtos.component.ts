@@ -65,7 +65,7 @@ export class DoacaoProdutosComponent implements OnInit {
                 this.messages = [{ severity: 'success', summary: 'Sucesso', detail: 'Produto doado com sucesso! Você ganhou EcoPoints!' }];
                 const userId = this.obterUserId();
                 if (userId) {
-                    this.atualizarEcoPointsDoUsuario(userId, 1); // Supondo que você ganhe 1 EcoPoint por doação
+                    this.atualizarEcoPointsDoUsuario(userId, 5); // Supondo que você ganhe 1 EcoPoint por doação
                 } else {
                     console.error('Erro: ID do usuário não encontrado');
                 }
