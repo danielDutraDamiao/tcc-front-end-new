@@ -3,6 +3,7 @@ import { DoacaoService } from './doacao.service';
 import { EstadoDTO } from 'src/app/demo/models/estado.dto';
 import { OngDTO } from 'src/app/demo/models/ong.dto';
 import { Router } from '@angular/router';
+import { EcocoinsComponent } from '../ecocoins/ecocoins.component';
 
 
 @Component({
@@ -69,6 +70,11 @@ export class DoacaoComponent implements OnInit {
   navegarParaDoacao(ong: OngDTO) {
     // Aqui você pode usar a informação da ONG para passar como parâmetro, se necessário
     this.route.navigate(['/uikit/doacao-produtos']);
+  }
+
+  navegarParaEcocoins() {
+    // Aqui você pode usar a informação da ONG para passar como parâmetro, se necessário
+    this.route.navigate(['/uikit/ecocoins']);
   }
 
 

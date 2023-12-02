@@ -4,6 +4,7 @@ import { Product } from '../../api/product';
 import { ProductService } from '../../service/product.service';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -21,11 +22,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
+    constructor(
+        private productService: ProductService,
+        public layoutService: LayoutService,
+        private route: Router // Adicione esta linha
+      ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
-            this.initChart();
+          this.initChart();
         });
-    }
+      }
+      
 
     ngOnInit() {
         this.initChart();
@@ -96,9 +102,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
         };
     }
 
+
+    navegarParaVenda() {
+
+        this.route.navigate(['/uikit/venda']);
+      }
+
+    navegarParaDoacao() {
+
+        this.route.navigate(['/uikit/doacao']);
+      }
+
+    navegarParaReciclagem() {
+
+        this.route.navigate(['/uikit/reciclagem']);
+      }
+    
+    
+
+
     ngOnDestroy() {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
+ 
     }
+
+
+    
 }

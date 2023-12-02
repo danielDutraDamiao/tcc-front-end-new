@@ -46,6 +46,11 @@ export class ReciclagemComponent implements OnInit {
     this.route.navigate(['/uikit/doacao-produtos']);
   }
 
+  navegarParaEcocoins() {
+    // Aqui você pode usar a informação da ONG para passar como parâmetro, se necessário
+    this.route.navigate(['/uikit/ecocoins']);
+  }
+
   public buscarEstados() {
     this.reciclagemService.listarEstados().subscribe(estados => {
       this.options = estados.map(estado => {
