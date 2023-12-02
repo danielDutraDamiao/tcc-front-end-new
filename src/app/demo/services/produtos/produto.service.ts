@@ -33,8 +33,14 @@ export class ProdutoService {
     return this.http.delete<void>(`${this.baseURL}/${id}`);
   }
 
-  processarCompra(idProduto: number, idUsuario: number, quantidade: number): Observable<any> {
-    const params = new HttpParams().set('quantidade', quantidade.toString());
+  processarCompra(idProduto: number, idUsuario: number, quantidade: number, ecoPointsUsados: number): Observable<any> {
+    const params = new HttpParams()
+        .set('quantidade', quantidade.toString())
+        .set('ecopointsUsados', ecoPointsUsados.toString());
+    
+        //http://localhost:4200/api/produtos/comprar/1/24
+
     return this.http.post(`${this.baseURL}/comprar/${idProduto}/${idUsuario}`, null, { params });
-  }
+}
+
 }

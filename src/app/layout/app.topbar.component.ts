@@ -14,6 +14,7 @@ import { UsersDTO } from '../demo/models/users.dto';
 export class AppTopBarComponent implements OnInit{
     items!: MenuItem[];
     ecocoins: number = 0;
+    ecopoints: number = 0;
     exibirDialogo: boolean = false;
     usuario: UsersDTO | null = null;
 
@@ -31,12 +32,25 @@ export class AppTopBarComponent implements OnInit{
 
         ngOnInit() {
             this.atualizarEcoCoins();
+            this.atualizarEcoPoints();  // Adicione esta chamada para atualizar os EcoPoints
+
         }
     
         atualizarEcoCoins() {
             this.userService.obterInformacoesUsuarioLogado().subscribe(
                 user => {
                     this.ecocoins = user.ecocoins;
+                },
+                error => {
+                    console.error('Erro ao obter informações do usuário', error);
+                }
+            );
+        }
+
+        atualizarEcoPoints() {
+            this.userService.obterInformacoesUsuarioLogado().subscribe(
+                user => {
+                    this.ecopoints = user.ecopoints;
                 },
                 error => {
                     console.error('Erro ao obter informações do usuário', error);
@@ -82,5 +96,5 @@ export class AppTopBarComponent implements OnInit{
         // Redirecionar para a tela de login ou realizar outras ações de logout necessárias
         this.router.navigate(['/login']);
     }
-    
+        
 }

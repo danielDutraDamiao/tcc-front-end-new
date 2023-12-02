@@ -42,6 +42,17 @@ export class UserService {
   return this.http.put(`${this.baseURL}/updateEcoCoins/${userId}`, null, { params });
 }
 
+atualizarEcoPoints(userId: number, ecoPoints: number): Observable<any> {
+  const params = new HttpParams().set('ecoPoints', ecoPoints.toString());
+  return this.http.put(`${this.baseURL}/updateEcoPoints/${userId}`, null, { params });
+}
+
+// UserService no Angular
+getEcoPointsDoUsuario(userId: number): Observable<any> {
+  return this.http.get(`${this.baseURL}/${userId}/ecopoints`);
+}
+
+
 obterInformacoesUsuarioLogado(): Observable<UsersDTO> {
   const userId = this.loginService.getUserId();
   return this.http.get<UsersDTO>(`${this.baseURL}/${userId}`);

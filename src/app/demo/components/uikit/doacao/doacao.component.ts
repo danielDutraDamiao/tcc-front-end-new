@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DoacaoService } from './doacao.service';
 import { EstadoDTO } from 'src/app/demo/models/estado.dto';
 import { OngDTO } from 'src/app/demo/models/ong.dto';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,10 @@ export class DoacaoComponent implements OnInit {
   ongs: OngDTO[] = []; // Lista original de ONGs
   ongsWithFilter: OngDTO[] = []; // Lista filtrada de ONGs para exibição na tabela  
 
-  constructor(private doacaoService: DoacaoService) {
+  constructor(
+    private doacaoService: DoacaoService,
+    private route: Router
+  ) {
     this.options = [];
   }
 
@@ -27,7 +31,7 @@ export class DoacaoComponent implements OnInit {
     this.buscarOngs();
   }
 
-  public buscarOngs(){
+  public buscarOngs() {
     this.doacaoService.listarOngs().subscribe(
       (resposta: OngDTO[]) => {
         this.ongs = resposta;
@@ -38,11 +42,16 @@ export class DoacaoComponent implements OnInit {
       }
     );
   }
-  
+
 
   public buscarEstados() {
     this.doacaoService.listarEstados().subscribe(estados => {
-      this.options = estados.map(estado => {
+      // Adiciona a opção "Todas as Cidades" no início do array
+      this.options = [{
+        name: 'Todas as Cidades',
+        value: null,
+        items: [{ label: 'Todas', value: null }]
+      }, ...estados.map(estado => {
         return {
           name: estado.nomeEstado,
           value: estado.idEstado,
@@ -53,15 +62,24 @@ export class DoacaoComponent implements OnInit {
             };
           })
         };
-      });
-      console.log(this.options);
+      })];
     });
   }
 
+  navegarParaDoacao(ong: OngDTO) {
+    // Aqui você pode usar a informação da ONG para passar como parâmetro, se necessário
+    this.route.navigate(['/uikit/doacao-produtos']);
+  }
+
+
   public filtrarOngs() {
     console.log(this.cidadeSelecionada, "estado selecionado (tipo):", typeof this.cidadeSelecionada);
-    
-  
+
+    if (this.cidadeSelecionada === null) {
+      this.ongsWithFilter = this.ongs; // Exibe todas as ONGs
+    }
+
+
     if (this.cidadeSelecionada || this.cidadeSelecionada === 0) { // Inclui a verificação para o valor 0
       this.ongsWithFilter = this.ongs.filter(ong => {
         console.log(this.ongs, "ongs dentro do filter");
@@ -74,18 +92,18 @@ export class DoacaoComponent implements OnInit {
         }
         return false; // Se ong.cidade for undefined, retorna false para o filter
       });
-  
+
       console.log(this.ongsWithFilter, "ongs filtradas fora do if");
     } else {
       this.ongsWithFilter = this.ongs;
       console.log(this.ongsWithFilter, "ongs filtradas else");
     }
   }
-  
-  
-  
-  
-  
+
+
+
+
+
 
 }
 

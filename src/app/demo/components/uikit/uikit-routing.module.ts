@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
         { path: 'login', data: { breadcrumb: 'Login' }, loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
         { path: 'doacao', data: { breadcrumb: 'Doacao' }, loadChildren: () => import('./doacao/doacao.module').then(m => m.DoacaoModule) },
         { path: 'doacao-produtos', data: { breadcrumb: 'Doacao Produtos' }, loadChildren: () => import('./doacao-produtos/doacao-produtos.module').then(m => m.DoacaoProdutosModule) },
-        {path: 'usuarios', data: { breadcrumb: 'Usuários' }, loadChildren: () => import('./cadastro-usuarios/usuarios.module').then(m => m.UsuariosModule) },
         { path: 'produtos', data: { breadcrumb: 'Produtos' }, loadChildren: () => import('./cadastro-produtos/produtos.module').then(m => m.ProdutosModule) },
         { path: 'ecocoins', loadChildren: () => import('./ecocoins/ecocoins.module').then(m => m.EcocoinsModule) },
         { path: 'input', data: { breadcrumb: 'Input' }, loadChildren: () => import('./input/inputdemo.module').then(m => m.InputDemoModule) },

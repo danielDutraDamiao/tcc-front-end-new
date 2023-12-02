@@ -4,21 +4,36 @@
 }
 
 
-.ecocoins-symbol {
+/* Estilos para os símbolos de EcoCoins e EcoPoints */
+.ecocoins-symbol, .ecopoints-symbol {
     background-color: #28a745; /* Cor verde */
     border-radius: 50%; /* Torna o fundo redondo */
-    padding: 10px; /* Espaçamento interno */
+    padding: 5px; /* Espaçamento interno */
     display: inline-flex; /* Para centralizar o ícone verticalmente */
     align-items: center;
     justify-content: center;
     color: white; /* Cor do ícone */
     font-family: 'money', sans-serif; /* Sua fonte pixelizada */
     font-size: 20px; /* Tamanho do ícone */
+    margin-right: 5px; /* Espaçamento à direita do símbolo */
 }
 
-.ecocoins-value {
+/* Estilos para os valores de EcoCoins e EcoPoints */
+.ecocoins-value, .ecopoints-value {
     font-family: 'money', sans-serif; /* Sua fonte pixelizada */
     color: #28a745; /* Cor verde */
-    margin-left: 5px; /* Espaçamento à esquerda */
+    margin-right: 20px; /* Espaçamento à direita do valor */
 }
 
+/* Estilo para o container que engloba os EcoCoins e EcoPoints */
+.eco-display {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para o container específico dos EcoCoins */
+.ecocoins-display {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Espaçamento entre EcoCoins e EcoPoints */
+}

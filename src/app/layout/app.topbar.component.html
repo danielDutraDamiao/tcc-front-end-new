@@ -16,10 +16,16 @@
     <div #topbarmenu class="layout-topbar-menu"
         [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
       
-        <div class="ecocoins-display">
-            <span class="ecocoins-symbol">E</span>
-            <span class="ecocoins-value">{{ ecocoins }} EcoCoins</span>
+        <div class="eco-display">
+            <div class="ecocoins-display">
+                <span class="ecocoins-symbol">E</span>
+                <span class="ecocoins-value">{{ ecocoins }} EcoCoins</span>
+                <span class="ecopoints-symbol">P</span>
+                <span class="ecopoints-value">{{ ecopoints }} EcoPoints</span>
+            </div>
         </div>
+
+    
 
         <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
             <i class="pi pi-cog"></i>

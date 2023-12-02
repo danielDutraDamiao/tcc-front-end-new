@@ -5,6 +5,7 @@ export class UsersDTO {
     email!: string;
     password!:string;
     ecocoins!: number;
+    ecopoints!: number;
 
     
 }

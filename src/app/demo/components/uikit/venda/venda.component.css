@@ -1,3 +1,18 @@
-.inputNumberPequeno {
-    width: 10px; /* Ajuste a largura conforme necessário */
+.produto-detalhes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    gap: 10px; /* Espaçamento entre os elementos */
 }
+
+.produto-detalhes .field {
+    width: 100%; /* Faz com que cada campo ocupe toda a largura disponível */
+}
+
+.quantidade-field, .ecoPoints-field {
+    width: 10px; /* Ajusta a largura dos campos */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Você pode adicionar mais estilos aqui conforme necessário */

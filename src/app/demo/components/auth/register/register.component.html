@@ -1,0 +1,50 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <img src="assets/{{layoutService.config.colorScheme === 'light' ? 'ecomarket' : 'ecomarket'}}.png"
+            alt="Sakai logo" class="mb-5 w-6rem flex-shrink-0">
+        <div
+            style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                    <div class="text-900 text-3xl font-medium mb-3">Bem vindo!</div>
+                </div>
+
+                <div>
+                    <form [formGroup]="formCadastro" (ngSubmit)="submitForm()">
+                        <label for="name" class="block text-900 text-xl font-medium mb-2">Nome</label>
+                        <input id="name" type="text" placeholder="Nome" pInputText class="w-full md:w-30rem mb-5"
+                            style="padding:1rem" formControlName="name">
+
+                        <label for="username" class="block text-900 text-xl font-medium mb-2">Nome de Usuário</label>
+                        <input id="username" type="text" placeholder="Nome de Usuário" pInputText
+                            class="w-full md:w-30rem mb-5" style="padding:1rem" formControlName="username">
+
+                        <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
+                        <input id="email" type="email" placeholder="Email" pInputText class="w-full md:w-30rem mb-5"
+                            style="padding:1rem" formControlName="email">
+
+
+                        <label for="password" class="block text-900 text-xl font-medium mb-2">Senha</label>
+                        <input id="password" type="password" placeholder="Senha" pInputText
+                            class="w-full md:w-30rem mb-5" style="padding:1rem" formControlName="password"
+                            type="password">
+
+                        <label for="confirmPassword" class="block text-900 text-xl font-medium mb-2">Confirmar
+                            Senha</label>
+                        <input id="confirmPassword" type="password" placeholder="Confirmar Senha" pInputText
+                            class="w-full md:w-30rem mb-5" style="padding:1rem" formControlName="confirmPassword"
+                            type="password">
+
+                        <label for="perfil" class="block text-900 text-xl font-medium mb-2">Selecione o Perfil</label>
+                        <p-dropdown [options]="perfils" optionLabel="perfil" formControlName="perfil"
+                            [style]="{'width':'100%', 'max-width':'30rem'}" class="custom-dropdown"></p-dropdown>
+
+
+                            <button pButton pRipple label="Registrar" class="w-full p-3 text-xl" style="margin-top: 1rem;" type="submit"></button>
+                        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

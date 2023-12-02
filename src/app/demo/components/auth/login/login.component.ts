@@ -58,7 +58,11 @@ export class LoginComponent implements OnInit {
   }
 
   navegarParaCriarConta() {
-    this.route.navigate(['/uikit/usuarios']); // Substitua '/caminho-para-criar-conta' pela rota desejada
+    this.route.navigate(['/register']); // Substitua '/caminho-para-criar-conta' pela rota desejada
+  }
+
+  navegarParaRecuperarSenha() {
+    this.route.navigate(['/recovery']); // Substitua '/caminho-para-recuperar-senha' pela rota desejada
   }
 }
 

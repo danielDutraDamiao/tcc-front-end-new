@@ -33,7 +33,6 @@ export class DoacaoProdutosComponent implements OnInit {
     ) { 
       this.produtoForm = new FormGroup({
         nomeProduto: new FormControl('', Validators.required),
-        precoProduto: new FormControl('', Validators.required),
         quantidade: new FormControl('', Validators.required),
         categoria: new FormControl(null, Validators.required),
         subcategoria: new FormControl(null, Validators.required) // Alterado de 'subCategoria' para 'subcategoria'
@@ -56,24 +55,43 @@ export class DoacaoProdutosComponent implements OnInit {
 
   enviarFormulario() {
     if (this.produtoForm.valid) {
-      this.produtoService.criarProduto(this.produtoForm.value).subscribe(
-        resposta => {
-          this.messages = [{ severity: 'success', summary: 'Sucesso', detail: 'Produto doado com sucesso! $50 EcoCoins' }];
-          const userId = this.obterUserId();
+        const produtoData = {
+            ...this.produtoForm.value,
+            precoProduto: 0
+        };
+
+        this.produtoService.criarProduto(produtoData).subscribe(
+            resposta => {
+                this.messages = [{ severity: 'success', summary: 'Sucesso', detail: 'Produto doado com sucesso! Você ganhou EcoPoints!' }];
+                const userId = this.obterUserId();
                 if (userId) {
-                    this.atualizarEcoCoinsDoUsuario(userId, 50); // Atualizar EcoCoins após doação bem-sucedida
+                    this.atualizarEcoPointsDoUsuario(userId, 1); // Supondo que você ganhe 1 EcoPoint por doação
                 } else {
                     console.error('Erro: ID do usuário não encontrado');
                 }
+            },
+            erro => {
+                this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Falha ao doar o produto.' }];
+            }
+        );
+    } else {
+        this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Formulário inválido.' }];
+    }
+}
+
+// Método para atualizar os EcoPoints do usuário
+atualizarEcoPointsDoUsuario(userId: number, ecoPoints: number) {
+    this.userService.atualizarEcoPoints(userId, ecoPoints).subscribe(
+        () => {
+            console.log('EcoPoints atualizados com sucesso!');
         },
         erro => {
-          this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Falha ao doar o produto.' }];
+            console.error('Erro ao atualizar EcoPoints', erro);
         }
-      );
-    } else {
-      this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Formulário inválido.' }];
-    }
-  }
+    );
+}
+
+
 
   // Em DoacaoProdutosComponent
 atualizarEcoCoinsDoUsuario(userId: number, ecoCoins: number) {

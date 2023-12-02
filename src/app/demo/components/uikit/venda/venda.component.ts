@@ -11,6 +11,7 @@ import { CategoriaService } from 'src/app/demo/services/categorias/categoria.ser
 import { ProdutoService } from 'src/app/demo/services/produtos/produto.service';
 import { LoginService } from '../../auth/login/login.service';
 import { Message } from 'primeng/api';
+import { UserService } from 'src/app/demo/services/user/user.service';
 
 @Component({
   templateUrl: './venda.component.html',
@@ -26,6 +27,8 @@ export class VendaComponent implements OnInit {
   produtoSelecionado: ProdutoDTO | null = null;
   quantidadeCompra: number = 1; // Quantidade inicial
   messages: Message[] = [];
+  maxEcoPoints: number = 0;
+  ecoPointsUsados: number = 0;
 
 
   constructor(
@@ -34,6 +37,7 @@ export class VendaComponent implements OnInit {
     private loginService: LoginService,
     private subCategoriaService: SubCategoriaService,
     private productService: ProductService,
+    private userService: UserService
   ) { this.items = []; }
 
   ngOnInit() {
@@ -108,9 +112,20 @@ export class VendaComponent implements OnInit {
   }
 
   comprarProduto(produto: ProdutoDTO) {
-    this.produtoSelecionado = produto;
-    this.exibirDialogo = true;
-  }
+    const userId = this.loginService.getUserId();
+    if (userId) {
+        this.userService.getEcoPointsDoUsuario(userId).subscribe({
+            next: (ecoPoints) => {
+                this.maxEcoPoints = ecoPoints;
+                this.produtoSelecionado = produto;
+                this.exibirDialogo = true;
+            },
+            error: (erro) => {
+                // Handle error
+            }
+        });
+    }
+}
 
   fecharDialogo() {
     this.exibirDialogo = false;
@@ -120,8 +135,8 @@ export class VendaComponent implements OnInit {
   confirmarCompra() {
     const userId = this.loginService.getUserId();
     if (this.produtoSelecionado) {
-      this.produtoService.processarCompra(this.produtoSelecionado.idProduto, userId, this.quantidadeCompra)
-        .subscribe({
+      this.produtoService.processarCompra(this.produtoSelecionado.idProduto, userId, this.quantidadeCompra, this.ecoPointsUsados)
+      .subscribe({
           next: (resposta) => {
             this.messages = [{ severity: 'success', summary: 'Compra Confirmada', detail: 'Sua compra foi realizada com sucesso!' }];
           },
