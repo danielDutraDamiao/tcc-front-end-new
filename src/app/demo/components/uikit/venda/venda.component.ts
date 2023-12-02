@@ -42,17 +42,16 @@ export class VendaComponent implements OnInit {
 
   ngOnInit() {
     forkJoin({
-      categorias: this.categoriaService.listarCategorias(),
-      subCategorias: this.subCategoriaService.listarSubCategorias(),
-      produtos: this.produtoService.listarProdutos()
+        categorias: this.categoriaService.listarCategorias(),
+        subCategorias: this.subCategoriaService.listarSubCategorias(),
+        produtos: this.produtoService.listarProdutos()
     }).subscribe(result => {
-      this.categorias = result.categorias;
-      this.subCategorias = result.subCategorias;
-      this.produtos = result.produtos;
-      this.items = this.buildMenu(this.produtos);
-
+        this.categorias = result.categorias;
+        this.subCategorias = result.subCategorias;
+        this.produtos = result.produtos.filter(produto => produto.tipo === 'VENDA');
+        this.items = this.buildMenu(this.produtos);
     });
-  }
+}
 
 
 

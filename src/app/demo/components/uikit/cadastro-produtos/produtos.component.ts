@@ -52,20 +52,27 @@ export class ProdutosComponent implements OnInit {
 
   enviarFormulario() {
     if (this.produtoForm.valid) {
-      this.produtoService.criarProduto(this.produtoForm.value).subscribe(
-        resposta => {
-          console.log('Produto criado:', resposta);
-          this.messages = [{ severity: 'success', summary: 'Sucesso', detail: 'Produto criado com sucesso!' }];
-        },
-        erro => {
-          console.error('Erro ao criar produto:', erro);
-          this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Falha ao criar o produto.' }];
-        }
-      );
+        // Criar um objeto com os dados do formulário e o tipo definido como 'VENDA'
+        const produtoData = {
+            ...this.produtoForm.value,
+            tipo: 'VENDA'  // Adicionar a propriedade tipo
+        };
+
+        this.produtoService.criarProduto(produtoData).subscribe(
+            resposta => {
+                console.log('Produto criado:', resposta);
+                this.messages = [{ severity: 'success', summary: 'Sucesso', detail: 'Produto criado com sucesso!' }];
+            },
+            erro => {
+                console.error('Erro ao criar produto:', erro);
+                this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Falha ao criar o produto.' }];
+            }
+        );
     } else {
-      this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Formulário inválido.' }];
+        this.messages = [{ severity: 'error', summary: 'Erro', detail: 'Formulário inválido.' }];
     }
-  }
+}
+
   
 
   onCategoriaChange(categoria: any) {

@@ -13,5 +13,6 @@ export class ProdutoDTO {
     quantidade!: Number;
     statusInventario!: string;
     avaliacao!: Number;
+    tipo!: string;
 
 }   
